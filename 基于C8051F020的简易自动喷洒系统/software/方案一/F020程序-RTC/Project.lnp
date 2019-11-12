@@ -1,0 +1,7 @@
+"main.obj",
+"Delay.obj",
+"lcd.obj",
+"I2C.obj",
+"Keydown.obj" 
+TO "Project" 
+RAMSIZE(256) 

@@ -1,0 +1,161 @@
+C51 COMPILER V9.53.0.0   MAIN                                                              03/26/2018 09:49:54 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: Z:\Software\Keil4\C51\BIN\C51.EXE main.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "c8051f020.h"
+   2          #include "delay.h"
+   3          #include "lcd.h"
+   4          #include "I2C.h"
+   5          #include "keydown.h"
+   6          
+   7          typedef unsigned int u16;
+   8          typedef unsigned char u8;
+   9          int Clock[16]; //读寄存器pecf8563  buffer
+  10          
+  11          sbit LED = P1^6;//下载程序指示灯
+  12          
+  13          extern u8 KeyValue;
+  14          extern u8 code num[],kong[],kong1[],rain[];
+  15          extern int flag_move,flag_set,Time_Count_flag;
+  16          
+  17          struct Time //结构体全局变量
+  18          {
+  19            unsigned char second;
+  20            unsigned char minite;
+  21            unsigned char hour;
+  22            unsigned char day;
+  23            unsigned char week;
+  24            unsigned char month;
+  25            unsigned char year;
+  26          };
+  27          struct Reg
+  28          {
+  29            unsigned char reg1;
+  30            unsigned char reg2;
+  31            unsigned char clk;
+  32            unsigned char count1;
+  33            unsigned char count2;
+  34          };
+  35          struct Alarm
+  36          {
+  37            unsigned char minite;
+  38            unsigned char hour;
+  39            unsigned char day;
+  40            unsigned char week;
+  41          };
+  42          /*----------------函数定义声明-------------------------*/
+  43          void PORT_Init();//交叉开关使能
+  44          void SYSCLK_Init();
+  45          void Disable_Wdog();  //禁止看门狗定时器
+  46          void Clock_Setting();
+  47          void Init();             //初始化
+  48            
+  49          
+  50          void PORT_Init()//交叉开关使能
+  51          {
+  52   1        XBR0    = 0x07;   // Enable UART0(TXD0-P0.0  RXD-P0.1)  SPI_SCK-P0.2  SPI_MISO-P0.3
+  53   1                          // SPI_MOSI-P0.4  SPI_NSS-P0.5   (SDA-P0.6   SCL-P0.7)
+  54   1        XBR1    = 0x10;   // INT1使能P1.2
+  55   1        XBR2    = 0x44;   // TXD1-P1.0  RXD1-P1.1
+C51 COMPILER V9.53.0.0   MAIN                                                              03/26/2018 09:49:54 PAGE 2   
+
+  56   1        P3MDOUT = 0xff; 
+  57   1        P1MDOUT = 0xff; 
+  58   1        P2MDOUT = 0xff; 
+  59   1      }
+  60          /*void Timer0_Init() 
+  61            {     
+  62              TMOD      = 0x02; //方式2 定时，自动重装载  
+  63              TL0       = 0x06;     
+  64              TH0       = 0x06; 
+  65            }*/
+  66          void SYSCLK_Init()
+  67          {   
+  68   1        unsigned int i;
+  69   1        OSCXCN=0X67;           //0X67=0110,0111
+  70   1        for(i=0;i<256;i++);    //等待>1ms
+  71   1        while(!(OSCXCN&0X80)); //等待XTLVLD变为1
+  72   1        OSCICN=0X88;           //时钟失效监测器，选择外部时钟源作为系统时钟
+  73   1      }
+  74          
+  75          void Disable_Wdog()   //禁止看门狗定时器
+  76          {  
+  77   1        WDTCN=0xDE;  
+  78   1        WDTCN=0xAD; 
+  79   1      }
+  80          
+  81          void Clock_Setting()
+  82          {
+  83   1        struct Time TIME={0x10,0x49,0x09,0x15,0x00,0x03,0x18};//设置时间： 秒/分/时/日/星期/月/年
+  84   1        struct Reg REG={0x00,0x00,0x83,0x82,0x00};//设置寄存器
+  85   1        struct Alarm ALARM={0x00,0x00,0x00,0x00};//设置报时控制寄存器
+  86   1        unsigned char Set[16];//写寄存器buffer
+  87   1        Set[0]=REG.reg1;  
+  88   1        Set[1]=REG.reg2;
+  89   1        Set[2]=TIME.second;
+  90   1        Set[3]=TIME.minite;
+  91   1        Set[4]=TIME.hour;
+  92   1        Set[5]=TIME.day;
+  93   1        Set[6]=TIME.week;
+  94   1        Set[7]=TIME.month;
+  95   1        Set[8]=TIME.year;
+  96   1        Set[9]=ALARM.minite;
+  97   1        Set[10]=ALARM.hour;
+  98   1        Set[11]=ALARM.day;
+  99   1        Set[12]=ALARM.week;
+ 100   1        Set[13]=REG.clk;    //CLKOUT输出寄存器   0DH
+ 101   1        Set[14]=REG.count1; //定时器控制寄存器   0EH
+ 102   1        Set[15]=REG.count2; //定时器倒计数寄存器 0FH
+ 103   1        //WritePcf(Set,0,16);//设置时钟
+ 104   1      }
+ 105          
+ 106          void Init()
+ 107          {
+ 108   1        Disable_Wdog();
+ 109   1        PORT_Init();
+ 110   1        SYSCLK_Init();
+ 111   1        Initial_Lcd();//LCD初始化
+ 112   1        clear_screen();//清屏
+ 113   1        SMBusInit();//SMBus初始化 设置I2C
+ 114   1      }
+ 115          void main()
+ 116          { 
+ 117   1        u8 i=0;
+C51 COMPILER V9.53.0.0   MAIN                                                              03/26/2018 09:49:54 PAGE 3   
+
+ 118   1        LED=0;//下载程序成功指示灯
+ 119   1        Init();
+ 120   1        EA=1;//打开中断
+ 121   1        Clock_Setting();
+ 122   1        //Timer0_Init();//定时器0中断
+ 123   1        //IE = 0x82;//中断初始化
+ 124   1        //TR0=1;
+ 125   1        Delay_ms(200);
+ 126   1        while(1)
+ 127   1        {
+ 128   2          //Clock_Setting();//需设置时间时使用
+ 129   2          ReadPcf(Clock,0,16);//实时时钟显读取
+ 130   2          //display_graphic_8x16(1,(0+8*0),&num[KeyValue*16]);//按键值标志
+ 131   2          Key_setting();
+ 132   2          Time_Watch();
+ 133   2        }
+ 134   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    306    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =     32      33
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,156 @@
+C51 COMPILER V9.53.0.0   KEYDOWN                                                           03/18/2018 15:34:21 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE KEYDOWN
+OBJECT MODULE PLACED IN Keydown.OBJ
+COMPILER INVOKED BY: Z:\Software\Keil4\C51\BIN\C51.EXE Keydown.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(
+                    -2)
+
+line level    source
+
+   1          #include "c8051f020.h"
+   2          #include "keydown.h"
+   3          #include "delay.h"
+   4          #include "lcd.h"
+   5          
+   6          typedef unsigned int u16;   //对数据类型进行声明定义
+   7          typedef unsigned char u8;
+   8          
+   9          sbit up     = P2^0;
+  10          sbit down   = P2^1;
+  11          sbit left   = P2^2;
+  12          sbit right  = P2^3;
+  13          sbit centre = P2^4;
+  14          u8 KeyValue=0;
+  15          int Set_Begin[16]={0,0,0,0,8},Set_End[16]={0,0,0,0,9};
+  16          int flag_page=0,flag_move=0;
+  17          extern int Clock[];
+  18          extern char code begin_time[],end_time[];//汉字
+  19          extern char code num[],heng[],maohao[],kong[];//字符
+  20          extern int bcd_dec(uchar bat);  //BCD码转十进制
+  21          
+  22          
+  23          void Key_Move(int page[16])//初始or结束 页面设定
+  24          {
+  25   1        int i,j;
+  26   1        if(right == 0)//右移 修改时间
+  27   1        {Delay_ms(40);if(right == 0){flag_move++;if(flag_move > 2)flag_move=0;}}
+  28   1          if(left == 0)//左移 修改时间
+  29   1        {Delay_ms(40);if(left ==  0){flag_move--;if(flag_move < 0)flag_move=2;}}
+  30   1        
+  31   1          if(flag_move == 0)//时间设置修改
+  32   1          {
+  33   2            Delay_ms(80);
+  34   2            if(up == 0)
+  35   2            {page[4]++;page[4]=(page[4]>24 ? 0:page[4]);}
+  36   2            if(down == 0)
+  37   2            {page[4]--;page[4]=(page[4]<0  ? 24:page[4]);}//设置时间限幅
+  38   2          }
+  39   1          
+  40   1          if(flag_move != 0)i=flag_move;  
+  41   1          if(flag_move == i)
+  42   1          {
+  43   2            Delay_ms(80);
+  44   2            if(up == 0)
+  45   2            {page[4-i]++;page[4-i]=(page[4-i]>59 ? 0:page[4-i]);}
+  46   2            if(down == 0)
+  47   2            {page[4-i]--;page[4-i]=(page[4-i]<0  ? 59:page[4-i]);}//设置时间限幅
+  48   2          }
+  49   1        
+  50   1          if(flag_page == 1 || flag_page == 2)//修改初始时间页面 →字符闪烁
+  51   1           {
+  52   2             j=flag_move;
+  53   2              if(flag_move == j)
+  54   2              {
+C51 COMPILER V9.53.0.0   KEYDOWN                                                           03/18/2018 15:34:21 PAGE 2   
+
+  55   3                display_graphic_8x16(7,(16+8*(3*j)),kong);
+  56   3                display_graphic_8x16(7,(16+8*(3*j+1)),kong);//时间数字位置显示为空，实现闪烁效果
+  57   3                Delay_ms(200);
+  58   3              }   
+  59   2           }     
+  60   1      }
+  61          
+  62          void Key_setting()
+  63          {
+  64   1        u8 x,y;
+  65   1        Time_Display();
+  66   1        if(centre == 0)
+  67   1        {
+  68   2          Delay_ms(20);
+  69   2          flag_page=1;
+  70   2          if(centre == 0)
+  71   2          {
+  72   3            //Set_Begin[4]=(bcd_dec(Clock[4]&0x3f));//时
+  73   3            //Set_Begin[3]=(bcd_dec(Clock[3]&0x3f));//分
+  74   3            //Set_Begin[2]=(bcd_dec(Clock[2]&0x7f));//秒
+  75   3            
+  76   3            //Set_End[4]=(bcd_dec(Clock[4]&0x3f));//时
+  77   3            //Set_End[3]=(bcd_dec(Clock[3]&0x3f));//分
+  78   3            //Set_End[2]=(bcd_dec(Clock[2]&0x7f));//秒
+  79   3            Initial_Lcd();
+  80   3            Delay_ms(200);
+  81   3            while((flag_page==1))//设置初始浇水时间
+  82   3            {
+  83   4              for(x=0;x<6;x++)
+  84   4              {
+  85   5                display_graphic_16x16(1,(8+16*x),&begin_time[x*32]);
+  86   5              }
+  87   4              display_graphic_8x16(7,(16+8*0),&num[(Set_Begin[4])/10*16]);
+  88   4              display_graphic_8x16(7,(16+8*1),&num[(Set_Begin[4])%10*16]);//时
+  89   4              display_graphic_8x16(7,(16+8*2),maohao);
+  90   4              display_graphic_8x16(7,(16+8*3),&num[(Set_Begin[3])/10*16]);
+  91   4              display_graphic_8x16(7,(16+8*4),&num[(Set_Begin[3])%10*16]);//分
+  92   4              display_graphic_8x16(7,(16+8*5),maohao);
+  93   4              display_graphic_8x16(7,(16+8*6),&num[(Set_Begin[2])/10*16]);
+  94   4              display_graphic_8x16(7,(16+8*7),&num[(Set_Begin[2])%10*16]);//秒
+  95   4              if(centre == 0)flag_page=2;//跳至页面2 即设置结束时间页面
+  96   4              Key_Move(Set_Begin);//设置 结束时间时的移动
+  97   4            }
+  98   3            Initial_Lcd();
+  99   3            Delay_ms(100);
+ 100   3            while((flag_page==2))//设置结束浇水时间
+ 101   3            {
+ 102   4              for(y=0;y<6;y++)
+ 103   4              {
+ 104   5                display_graphic_16x16(1,(8+16*y),&end_time[y*32]);
+ 105   5              }
+ 106   4              display_graphic_8x16(7,(16+8*0),&num[(Set_End[4])/10*16]);
+ 107   4              display_graphic_8x16(7,(16+8*1),&num[(Set_End[4])%10*16]);//时
+ 108   4              display_graphic_8x16(7,(16+8*2),maohao);
+ 109   4              display_graphic_8x16(7,(16+8*3),&num[(Set_End[3])/10*16]);
+ 110   4              display_graphic_8x16(7,(16+8*4),&num[(Set_End[3])%10*16]);//分
+ 111   4              display_graphic_8x16(7,(16+8*5),maohao);
+ 112   4              display_graphic_8x16(7,(16+8*6),&num[(Set_End[2])/10*16]);
+ 113   4              display_graphic_8x16(7,(16+8*7),&num[(Set_End[2])%10*16]);//秒
+ 114   4              if(centre == 0)flag_page=0;//跳转至 时间显示页面
+ 115   4              Key_Move(Set_End);//设置 结束时间时的移动
+ 116   4            }
+C51 COMPILER V9.53.0.0   KEYDOWN                                                           03/18/2018 15:34:21 PAGE 3   
+
+ 117   3            Initial_Lcd();
+ 118   3            Delay_ms(100);
+ 119   3          }
+ 120   2        }
+ 121   1          if(up == 0)KeyValue=1;
+ 122   1          if(down ==0)KeyValue=2;
+ 123   1          if(left == 0)KeyValue=3;
+ 124   1          if(right == 0)KeyValue=4;
+ 125   1          if(centre == 0)KeyValue=5;
+ 126   1      }
+ 127          
+ 128          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1535    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     69       9
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

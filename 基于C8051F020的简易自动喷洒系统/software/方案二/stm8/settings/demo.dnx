@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<settings>
+    <Stack>
+        <FillEnabled>0</FillEnabled>
+        <OverflowWarningsEnabled>1</OverflowWarningsEnabled>
+        <WarningThreshold>90</WarningThreshold>
+        <SpWarningsEnabled>1</SpWarningsEnabled>
+        <WarnLogOnly>1</WarnLogOnly>
+        <UseTrigger>1</UseTrigger>
+        <TriggerName>main</TriggerName>
+        <LimitSize>0</LimitSize>
+        <ByteLimit>50</ByteLimit>
+    </Stack>
+    <DebugChecksum>
+        <Checksum>1274164101</Checksum>
+    </DebugChecksum>
+    <CallStack>
+        <ShowArgs>0</ShowArgs>
+    </CallStack>
+    <Disassembly>
+        <MixedMode>1</MixedMode>
+    </Disassembly>
+    <InterruptLog>
+        <LogEnabled>0</LogEnabled>
+        <SumEnabled>0</SumEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+        <ShowTimeSum>1</ShowTimeSum>
+        <SumSortOrder>0</SumSortOrder>
+    </InterruptLog>
+    <DataLog>
+        <LogEnabled>0</LogEnabled>
+        <SumEnabled>0</SumEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+        <ShowTimeSum>1</ShowTimeSum>
+    </DataLog>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
+    <Interrupts>
+        <Enabled>1</Enabled>
+    </Interrupts>
+    <MemoryMap>
+        <Enabled>0</Enabled>
+        <Base>0</Base>
+        <UseAuto>0</UseAuto>
+        <TypeViolation>1</TypeViolation>
+        <UnspecRange>1</UnspecRange>
+        <ActionState>1</ActionState>
+    </MemoryMap>
+    <Trace1>
+        <Enabled>0</Enabled>
+        <ShowSource>1</ShowSource>
+    </Trace1>
+    <Simulator>
+        <Freq>16000000</Freq>
+    </Simulator>
+    <SfrWindow>
+        <Show>1 1</Show>
+        <Sort>4 0</Sort>
+    </SfrWindow>
+    <Log_file>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </Log_file>
+    <DataSample>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+    </DataSample>
+    <LogFile>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </LogFile>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
+    <Breakpoints>
+        <Bp0>_ "STD_CODE" "{$PROJ_DIR$\stm8s_it.c}.500.1" 0 0 0 0 "" 0 ""</Bp0>
+        <Count>1</Count>
+    </Breakpoints>
+    <Aliases>
+        <A0>_ "C:\Users\Administrator.C1QAPFPREXQRMXD\Desktop\MY_DEMO5-27xxx\MY_DEMO5-2600\main.c" ""</A0>
+        <A1>_ "C:\Users\Administrator\Desktop\MY_DEMO5-27\MY_DEMO5-2600\main.c" ""</A1>
+        <A2>_ "C:\Users\Administrator\Desktop\STM8S\stm8\stm8s_it.c" ""</A2>
+        <A3>_ "C:\Users\Administrator\Desktop\stm8\STM8S_StdPeriph_Driver\src\stm8s_clk.c" ""</A3>
+        <A4>_ "C:\Users\Administrator\Desktop\stm8\STM8S_StdPeriph_Driver\src\stm8s_gpio.c" ""</A4>
+        <A5>_ "C:\Users\Administrator\Desktop\stm8\STM8S_StdPeriph_Driver\src\stm8s_tim1.c" ""</A5>
+        <A6>_ "C:\Users\Administrator\Desktop\stm8\STM8S_StdPeriph_Driver\src\stm8s_tim2.c" ""</A6>
+        <A7>_ "D:\大三\STM8\FMQ_Y\MY_DEMO5-2600\STM8S_StdPeriph_Driver\src\stm8s_clk.c" ""</A7>
+        <A8>_ "D:\大三\STM8\FMQ_Y\MY_DEMO5-2600\STM8S_StdPeriph_Driver\src\stm8s_tim1.c" ""</A8>
+        <A9>_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\CLOCK - 副本\STM8S_StdPeriph_Driver\src\stm8s_tim1.c" ""</A9>
+        <A10>_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\CLOCK - 副本\STM8S_StdPeriph_Driver\src\stm8s_tim2.c" ""</A10>
+        <A11>_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\CLOCK - 副本\STM8S_StdPeriph_Driver\src\stm8s_tim4.c" ""</A11>
+        <A12>_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\CLOCK\STM8S_StdPeriph_Driver\src\stm8s_gpio.c" ""</A12>
+        <A13>_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\MY_DEMO\main.c" ""</A13>
+        <A14>_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\MY_DEMO\stm8s_it.c" ""</A14>
+        <A15>_ "E:\快捷文件\stm8uart实验\stm8\stm8\STM8S_StdPeriph_Driver\src\stm8s_uart1.c" ""</A15>
+        <A16>_ "E:\快捷文件\stm8uart实验\uart接收字符串实验\stm8\stm8s_it.c" ""</A16>
+        <Count>17</Count>
+        <SuppressDialog>1</SuppressDialog>
+    </Aliases>
+    <DebuggerSettings>
+        <DisableInterruptsWhenStepping>0</DisableInterruptsWhenStepping>
+        <LeaveTargetRunning>0</LeaveTargetRunning>
+    </DebuggerSettings>
+</settings>

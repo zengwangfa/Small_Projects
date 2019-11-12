@@ -1,0 +1,81 @@
+C51 COMPILER V9.53.0.0   DELAY                                                             03/18/2018 15:34:17 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE DELAY
+OBJECT MODULE PLACED IN Delay.OBJ
+COMPILER INVOKED BY: Z:\Software\Keil4\C51\BIN\C51.EXE Delay.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "c8051f020.h"
+   2          #include "intrins.h"
+   3          #include "delay.h"
+   4          
+   5          /***********************************************************************************
+   6          * 函数名称：Delay_us;
+   7          *
+   8          * 函数功能描述：延时n微秒子函数;
+   9          *              
+  10          * 输入参数：延时时间（单位微秒）;
+  11          *
+  12          * 返回数据：none；
+  13          *
+  14          * 注意：    none;
+  15          ************************************************************************************/
+  16          
+  17          void Delay_us(unsigned int Times)
+  18          {
+  19   1        unsigned int i;
+  20   1        for (i=0; i<Times; i++)
+  21   1        {
+  22   2          _nop_();_nop_();_nop_();_nop_();
+  23   2          _nop_();_nop_();_nop_();_nop_();
+  24   2          _nop_();_nop_();_nop_();_nop_();
+  25   2          _nop_();
+  26   2        }
+  27   1      }
+  28          
+  29          /***********************************************************************************
+  30          * 函数名称：Delay_ms;
+  31          *
+  32          * 函数功能描述：延时n毫秒子函数;
+  33          *              
+  34          * 输入参数：延时时间（单位毫秒）;
+  35          *
+  36          * 返回数据：none；
+  37          *
+  38          * 注意：    none;
+  39          ************************************************************************************/
+  40          
+  41          void Delay_ms(unsigned int Times) 
+  42          {
+  43   1          unsigned char i;
+  44   1        for (i=0; i<Times; i++) 
+  45   1        {
+  46   2           Delay_us(250);
+  47   2           Delay_us(250);
+  48   2           Delay_us(250);
+  49   2           Delay_us(250);
+  50   2        }
+  51   1      }
+  52          
+  53          /*void Enable_Wdog() 
+  54          {      
+  55            WDTCN=0xA5;                
+C51 COMPILER V9.53.0.0   DELAY                                                             03/18/2018 15:34:17 PAGE 2   
+
+  56          }   */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     64    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

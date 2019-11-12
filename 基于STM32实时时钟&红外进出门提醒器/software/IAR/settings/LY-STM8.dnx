@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<settings>
+    <Stack>
+        <FillEnabled>0</FillEnabled>
+        <OverflowWarningsEnabled>1</OverflowWarningsEnabled>
+        <WarningThreshold>90</WarningThreshold>
+        <SpWarningsEnabled>1</SpWarningsEnabled>
+        <WarnLogOnly>1</WarnLogOnly>
+        <UseTrigger>1</UseTrigger>
+        <TriggerName>main</TriggerName>
+        <LimitSize>0</LimitSize>
+        <ByteLimit>50</ByteLimit>
+    </Stack>
+    <MemoryMap>
+        <Enabled>0</Enabled>
+        <Base>0</Base>
+        <UseAuto>0</UseAuto>
+        <TypeViolation>1</TypeViolation>
+        <UnspecRange>1</UnspecRange>
+        <ActionState>1</ActionState>
+    </MemoryMap>
+    <DebugChecksum>
+        <Checksum>423502412</Checksum>
+    </DebugChecksum>
+    <CallStack>
+        <ShowArgs>0</ShowArgs>
+    </CallStack>
+    <Disassembly>
+        <MixedMode>1</MixedMode>
+        <InstrCount>0</InstrCount>
+    </Disassembly>
+    <Log_file>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </Log_file>
+    <Trace_Window>
+        <Trace_Instruction>1</Trace_Instruction>
+        <Trace_Interrupt_Handler>1</Trace_Interrupt_Handler>
+        <Trace_Data_Read>1</Trace_Data_Read>
+        <Trace_Data_Write>1</Trace_Data_Write>
+        <Trace_Stack_Read>1</Trace_Stack_Read>
+        <Trace_Stack_Write>1</Trace_Stack_Write>
+        <Trace_Dma_Read>1</Trace_Dma_Read>
+        <Trace_Dma_Write>1</Trace_Dma_Write>
+        <Trace_Time_Count_Event>1</Trace_Time_Count_Event>
+        <Trace_Memory_Access_Stall>1</Trace_Memory_Access_Stall>
+        <Trace_External_Input>1</Trace_External_Input>
+        <Trace_BEM_Event>1</Trace_BEM_Event>
+        <Trace_Discarded>1</Trace_Discarded>
+        <Trace_Interrupted>1</Trace_Interrupted>
+        <Trace_Non_Event>1</Trace_Non_Event>
+    </Trace_Window>
+    <Trace1>
+        <Enabled>0</Enabled>
+        <ShowSource>1</ShowSource>
+    </Trace1>
+    <CodeCoverage>
+        <Enabled>_ 0</Enabled>
+    </CodeCoverage>
+    <DriverProfiling>
+        <Enabled>0</Enabled>
+        <Mode>1</Mode>
+        <Graph>0</Graph>
+        <Symbiont>0</Symbiont>
+        <Exclusions />
+    </DriverProfiling>
+    <CallStackLog>
+        <Enabled>0</Enabled>
+    </CallStackLog>
+    <CallStackStripe>
+        <ShowTiming>1</ShowTiming>
+    </CallStackStripe>
+    <InterruptLog>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+        <SumEnabled>0</SumEnabled>
+        <ShowTimeSum>1</ShowTimeSum>
+        <SumSortOrder>0</SumSortOrder>
+    </InterruptLog>
+    <DataLog>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+        <SumEnabled>0</SumEnabled>
+        <ShowTimeSum>1</ShowTimeSum>
+    </DataLog>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
+    <Interrupts>
+        <Enabled>1</Enabled>
+    </Interrupts>
+    <MemConfig>
+        <Base>1</Base>
+        <Manual>0</Manual>
+        <Ddf>1</Ddf>
+        <TypeViol>0</TypeViol>
+        <Stop>1</Stop>
+    </MemConfig>
+    <Simulator>
+        <Freq>16000000</Freq>
+        <FreqHi>0</FreqHi>
+        <MultiCoreRunAll>1</MultiCoreRunAll>
+    </Simulator>
+    <array_types>
+        <Fmt0>u8[7]	4	0</Fmt0>
+    </array_types>
+    <watch_formats>
+        <Fmt0>{W}42:IO_flag	3	0</Fmt0>
+        <Fmt1>{W}42:IrDA_IN	3	0</Fmt1>
+        <Fmt2>{W}42:IrDA_OUT	3	0</Fmt2>
+        <Fmt3>{W}42:People_num	3	0</Fmt3>
+        <Fmt4>{W}42:count	3	0</Fmt4>
+        <Fmt5>{W}42:flag	3	0</Fmt5>
+        <Fmt6>{W}42:status	3	0</Fmt6>
+    </watch_formats>
+    <DataSample>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+    </DataSample>
+    <LogFile>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </LogFile>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
+    <Breakpoints>
+        <Count>0</Count>
+    </Breakpoints>
+    <Aliases>
+        <A0>_ "E:\01. (众想)剑齿虎STM8S208MB开发板\剑齿虎开发板(A盘)\02. 剑齿虎开发板-视频教程\第10讲 点亮第一个发光二极管\程序\LIB\src\stm8s_clk.c" "D:\01.百度网盘共享\03.(众想)剑齿虎STM8S208MB开发板\剑齿虎开发板(A盘)\02. 剑齿虎开发板-视频教程\第10讲 点亮第一个发光二极管\程序\LIB\src\stm8s_clk.c"</A0>
+        <Count>1</Count>
+        <SuppressDialog>1</SuppressDialog>
+    </Aliases>
+    <DebuggerSettings>
+        <DisableInterruptsWhenStepping>0</DisableInterruptsWhenStepping>
+        <LeaveTargetRunning>0</LeaveTargetRunning>
+    </DebuggerSettings>
+</settings>

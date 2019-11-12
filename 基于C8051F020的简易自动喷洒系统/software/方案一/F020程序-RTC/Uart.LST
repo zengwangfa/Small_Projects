@@ -1,0 +1,209 @@
+C51 COMPILER V9.53.0.0   UART                                                              12/31/2017 11:50:31 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN Uart.OBJ
+COMPILER INVOKED BY: Z:\Software\Keil4\C51\BIN\C51.EXE Uart.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "c8051F020.h"
+   2          #include "uart.h"
+   3          #include "delay.h"
+   4          #include "intrins.h"
+   5          /************************************************************************************/
+   6          
+   7          /************************************************************************************
+   8          // 常量及全局变量定义
+   9          *************************************************************************************/
+  10          
+  11          
+  12          /************************************************************************************
+  13          // 常量及全局变量定义
+  14          *************************************************************************************/
+  15          //#define INPUTSIZE  256  // 输入缓冲区256字节
+  16          //#define OUTPUTSIZE 256  // 输出缓冲区256字节
+  17              
+  18            unsigned char m_InputBuf[INPUTSIZE];  /* 接收缓冲区Comm_SendFinish:21*/
+  19            unsigned char m_OutputBuf[OUTPUTSIZE];/* 发送缓冲区*/
+  20            unsigned char m_SendFirstPos;       /* 发送缓冲区首索引*/
+  21            unsigned char m_SendLastPos;        /* 发送缓冲区尾索引*/
+  22            unsigned char m_ReceiveFirstPos;    /* 接收缓冲区首索引*/
+  23            unsigned char m_ReceiveLastPos;       /* 接收缓冲区尾索引*/
+  24            volatile unsigned char m_SendOver;
+  25          
+  26          /************************************************************************************
+  27          *  Uart0子程序
+  28          *************************************************************************************/
+  29          /***********************************************************************************
+  30          * 函数名称：Uart0_Init;
+  31          *
+  32          * 函数功能描述：Uart0初始化;
+  33          *              
+  34          * 输入参数：unsigned char类型，发送数据波特率;
+  35          *
+  36          * 返回数据：none；
+  37          *
+  38          * 注意：    none;
+  39          ************************************************************************************/
+  40          
+  41          void Uart0_Init(unsigned char BaudRate) //Uart0初始化        
+  42          {                                    
+  43   1        TR1=0;                              // 关闭定时器Timer1
+  44   1        ET1=0;                              // 关闭定时器Timer1中断 
+  45   1        PT1=0;                              // 关闭定时器Timer1中断优先权
+  46   1        TMOD&= 0x0f;                        // TMOD: 定时器1, 模式2, 8位重载 
+  47   1        TMOD|= 0x20;                        // TMOD: 定时器1, 模式2, 8位重载 
+  48   1        SCON0  = 0x50;                      // SCON0: 模式1, 8位UART, 使能RX
+  49   1        PCON  |= 0x80;                      // SMOD00 = 1
+  50   1        if (BaudRate>=BaudRate_4800)
+  51   1        {
+  52   2          CKCON |= 0x10;                             // 定时器Timer1使用系统时钟作为时间基准
+  53   2          TH1    = -(SYSCLK/1200/(BaudRate*16));     // 设置定时器Timer1重载值
+  54   2        }
+  55   1        else
+C51 COMPILER V9.53.0.0   UART                                                              12/31/2017 11:50:31 PAGE 2   
+
+  56   1        {
+  57   2          CKCON &= ~0x10;                               // 定时器Timer1使用系统时钟作为时间基准
+  58   2          TH1    = -(SYSCLK/1200/(BaudRate*16*12));     // 设置定时器Timer1重载值
+  59   2        }
+  60   1          ES0=0;                     // 关闭串口Uart0中断
+  61   1          PS=0;                      // 关闭串口Uart0中断优先权
+  62   1          TI0  = 1;                  // Indicate TX0 ready
+  63   1          RI0  = 0;                  // Indicate RX0 ready
+  64   1          TR1=1;               // 打开串口Uart0
+  65   1          RI0=0;
+  66   1          TI0=0;
+  67   1          ES0=1;
+  68   1          m_ReceiveLastPos=m_ReceiveFirstPos=0;
+  69   1          m_SendFirstPos=m_SendLastPos=0;       /* 发送缓冲区首索引*/ 
+  70   1      }
+  71          
+  72          /***********************************************************************************
+  73          * 函数名称：Uart0_Enable;
+  74          *
+  75          * 函数功能描述：Uart0初始化;
+  76          *              
+  77          * 输入参数：bool类型，打开输入1；关闭输入0;
+  78          *
+  79          * 返回数据：none；
+  80          *
+  81          * 注意：    none;
+  82          ************************************************************************************/
+  83          
+  84          void Uart0_Enable(bool Flag)
+  85          {
+  86   1          PS=1;
+  87   1        //PT0=0;
+  88   1        if (Flag)
+  89   1          TR1=1;   // 打开串口Uart0
+  90   1        else
+  91   1              TR1=0;   // 关闭串口Uart0
+  92   1      }
+  93          
+  94          
+  95          
+  96          /***********************************************************************************
+  97          * 函数名称：GetReciLen;
+  98          *
+  99          * 函数功能描述：Uart0接收串行数据长度计算;
+ 100          *              
+ 101          * 输入参数：none;
+ 102          *
+ 103          * 返回数据：unsigned char类型，串行口接收数据长度为m_ReceiveLastPos-m_ReceiveFirstPos；
+ 104          *
+ 105          * 注意：    none;
+ 106          ************************************************************************************/
+ 107          
+ 108          unsigned char GetReciLen(void)
+ 109          {
+ 110   1      //  WDTCN=0xA5;
+ 111   1        return(m_ReceiveLastPos-m_ReceiveFirstPos);
+ 112   1      }
+ 113          
+ 114          /***********************************************************************************
+ 115          * 函数名称：ReadString;
+ 116          *
+ 117          * 函数功能描述：Uart0接收串行数据;
+C51 COMPILER V9.53.0.0   UART                                                              12/31/2017 11:50:31 PAGE 3   
+
+ 118          *              
+ 119          * 输入参数：unsigned char* str接收数据返回目的数组，unsigned char len接收数据长度;
+ 120          *
+ 121          * 返回数据：unsigned char类型，实际上接收到的数据个数；
+ 122          *
+ 123          * 注意：    none;
+ 124          ************************************************************************************/
+ 125          unsigned char ReadString(unsigned char* str, unsigned char len)
+ 126          {
+ 127   1        register unsigned char i, j;
+ 128   1        j=GetReciLen();
+ 129   1        if(j>len)
+ 130   1          j=len;
+ 131   1        for(i=0; i<j; i++)
+ 132   1        {
+ 133   2          str[i]=m_InputBuf[m_ReceiveFirstPos++];
+ 134   2        //  WDTCN=0xA5;
+ 135   2        }
+ 136   1        return i;
+ 137   1      }
+ 138          
+ 139          
+ 140          void Uart0Send(unsigned char ch)
+ 141          {
+ 142   1        SBUF0=ch;             //送入缓冲区
+ 143   1        while (TI0 == 0);     //等待发送完毕
+ 144   1        TI0=0;                // 清零
+ 145   1      }
+ 146          
+ 147          void Uart0Sends(unsigned char *str)
+ 148          {
+ 149   1        while(*str!='\0')
+ 150   1        {
+ 151   2          SBUF0=*str;
+ 152   2          str++;
+ 153   2          while (TI0 == 0);     // Wait for the transmit to complete
+ 154   2          TI0=0;                // Clear TI1
+ 155   2        }
+ 156   1      }
+ 157          
+ 158          void Uart0_ISR(void) interrupt 4 using 1
+ 159          {
+ 160   1        if(RI0)
+ 161   1        {
+ 162   2          RI0=0;   // 清除RI0标志位
+ 163   2          m_InputBuf[m_ReceiveLastPos++]=SBUF0;
+ 164   2        }
+ 165   1        else 
+ 166   1        {
+ 167   2          TI0=0;  
+ 168   2          if(m_SendFirstPos!=m_SendLastPos)
+ 169   2          {
+ 170   3            SBUF0=m_OutputBuf[m_SendFirstPos];
+ 171   3            m_SendFirstPos++;
+ 172   3          }
+ 173   2          else
+ 174   2          {
+ 175   3            m_SendOver = 1;
+ 176   3          }
+ 177   2        }
+ 178   1      }
+ 179          
+C51 COMPILER V9.53.0.0   UART                                                              12/31/2017 11:50:31 PAGE 4   
+
+ 180          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    317    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =    517       4
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

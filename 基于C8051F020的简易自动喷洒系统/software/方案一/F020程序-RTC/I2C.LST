@@ -1,0 +1,322 @@
+C51 COMPILER V9.53.0.0   I2C                                                               03/26/2018 09:49:56 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE I2C
+OBJECT MODULE PLACED IN I2C.OBJ
+COMPILER INVOKED BY: Z:\Software\Keil4\C51\BIN\C51.EXE I2C.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          /************************************************************************************
+   2          *  Copyright (c) 2004,西安铭朗电子科技有限责任公司
+   3          *            All rights reserved.
+   4          *
+   5          * 文件名称： I2C.C
+   6          * 文件标识： none
+   7          * 适用器件： c8051f0f0、PCF8563
+   8          * 
+   9          * 摘 要： 本文件是I2C总线子程序；将跳线器JP5短接; 使用外部22.1184MHz晶振.
+  10          * 
+  11          * 当前版本：1.0
+  12          * 作 者：卢 阳
+  13          * 完成日期：2004年11月14日
+  14          *
+  15          * 历史版本：0.9 
+  16          * 原作者 ： 卢阳、张宁强
+  17          * 完成日期：2004年1月1日
+  18          *************************************************************************************/
+  19          
+  20          /************************************************************************************/
+  21          // 引用外部头文件
+  22          
+  23          #include "c8051f020.h"
+  24          #include "I2C.h"
+  25          //#include "gpsone.h"
+  26          #include "delay.h"
+  27          
+  28          /************************************************************************************/
+  29          
+  30          /************************************************************************************/
+  31          // 全局变量
+  32          /************************************************************************************/
+  33          
+  34          unsigned char Command;//命令缓存
+  35          int *I2CDataBuff;//待法发数据、接收数据指针
+  36          unsigned char ByteNumber;  //发送字节数
+  37          unsigned char ByteReadBytes;//读字节数
+  38          int *ByteReadAddress;//读缓冲区指针
+  39          unsigned char ChipChoice;//芯片选择，0选择RTC、1选择24C256              
+  40          
+  41          bit BusBusy;//总线忙
+  42          bit NoStop;//发送完一组数据后不发送停止位
+  43          
+  44          /***********************************************************************************
+  45          * 函数名称：SMBusInit;
+  46          *
+  47          * 函数功能描述：SMBus初始化;
+  48          *              
+  49          * 输入参数：none;
+  50          *
+  51          * 返回数据：none；
+  52          *
+  53          * 注意：    none;
+  54          ************************************************************************************/
+  55          
+C51 COMPILER V9.53.0.0   I2C                                                               03/26/2018 09:49:56 PAGE 2   
+
+  56          void SMBusInit(void)//SMBus初始化
+  57          {
+  58   1        SMB0CN=0x44;//SMBus控制寄存器
+  59   1        SMB0CR=0xee;//SCL速率设置l_0xed--0xf0
+  60   1        EIE1=EIE1|0x02;//开启中断
+  61   1        EIP1=EIP1|0x02;//设置IIC中断优先级
+  62   1        //NoStop=0;
+  63   1        NoStop=1;
+  64   1        
+  65   1      }
+  66          
+  67          /***********************************************************************************
+  68          * 函数名称：SMBusService;
+  69          *
+  70          * 函数功能描述：SMBus中断响应服务程序，判断状态码进行下步操作;
+  71          *              
+  72          * 输入参数：none;
+  73          *
+  74          * 返回数据：none；
+  75          *
+  76          * 注意：    none;
+  77          ************************************************************************************/
+  78          
+  79          void SMBusService (void) interrupt 7
+  80          {
+  81   1        switch (SMB0STA)
+  82   1          {
+  83   2          case 0x08: //0x08起始条件已发送
+  84   2            SMB0DAT=Command;
+  85   2            STA=0; 
+  86   2            break;
+  87   2      
+  88   2          case 0x10://0x10 重复起始条件已发送
+  89   2            SMB0DAT=Command;
+  90   2            STA=0;
+  91   2            break;
+  92   2            
+  93   2          case 0x18://0x18 地址+W已发送收到ACK
+  94   2            if (ByteNumber>0)
+  95   2            {
+  96   3              SMB0DAT=*I2CDataBuff;
+  97   3              I2CDataBuff++;
+  98   3              ByteNumber--;     
+  99   3            }
+ 100   2            else
+ 101   2            {
+ 102   3              STO=1;
+ 103   3              BusBusy=0;
+ 104   3            }
+ 105   2            break;
+ 106   2      
+ 107   2          case 0x20://0x20 地址+W 已发送收到NACK,从器件不应答发送STOP + START 重试
+ 108   2            STO=1;
+ 109   2            STA=1;
+ 110   2            break;
+ 111   2      
+ 112   2          case 0x28://0x28 数据字节已发送收到ACK
+ 113   2            if (ByteNumber>0)
+ 114   2            {
+ 115   3              SMB0DAT=*I2CDataBuff;
+ 116   3              I2CDataBuff++;
+ 117   3              ByteNumber--;     
+C51 COMPILER V9.53.0.0   I2C                                                               03/26/2018 09:49:56 PAGE 3   
+
+ 118   3            }
+ 119   2                 /*else
+ 120   2            {
+ 121   2              STO=1;
+ 122   2              BusBusy=0;
+ 123   2            }*/
+ 124   2             else
+ 125   2            {
+ 126   3              if(NoStop)
+ 127   3                {
+ 128   4                  STO=1;
+ 129   4                  BusBusy=0;
+ 130   4                }
+ 131   3              else 
+ 132   3                {
+ 133   4                  //STO=0;
+ 134   4                  //AA=1;
+ 135   4                  if(ChipChoice)
+ 136   4                    Command=I2C24AddressR;
+ 137   4                  else
+ 138   4                    Command=I2CPcfAddressR;
+ 139   4                  I2CDataBuff=ByteReadAddress;
+ 140   4                  ByteNumber=ByteReadBytes;
+ 141   4                  STA=1;
+ 142   4                  NoStop=1;
+ 143   4                 }        
+ 144   3            }
+ 145   2      
+ 146   2            break;
+ 147   2      
+ 148   2          case 0x30://0x30 数据字节已发送收到NACK,从器件不应答发送STOP + START 重试
+ 149   2            STO=1;
+ 150   2            STA=1;
+ 151   2            break;
+ 152   2      
+ 153   2          case 0x38://0x38 竞争失败
+ 154   2            STO=1;
+ 155   2            STA=1;
+ 156   2            break;
+ 157   2      
+ 158   2          case 0x40://0x40 地址+R 已发送,收到ACK
+ 159   2            if(ByteNumber>1) 
+ 160   2              AA=1; // 在应答周期ACK
+ 161   2            else 
+ 162   2              AA=0; 
+ 163   2      
+ 164   2            if (ByteNumber==0)
+ 165   2            { 
+ 166   3              STO=1;
+ 167   3              BusBusy=0; // 释放SMBus
+ 168   3            }
+ 169   2            break;
+ 170   2      
+ 171   2          case 0x48://0x48 地址+R 已发送收到NACK,从器件不应答发送重复起始条件重试
+ 172   2            STA=1;
+ 173   2            break;
+ 174   2      
+ 175   2          case 0x50://0x50 收到数据字节ACK 已发送
+ 176   2            if (ByteNumber>0)
+ 177   2            {
+ 178   3              *I2CDataBuff=SMB0DAT;
+ 179   3              I2CDataBuff++;
+C51 COMPILER V9.53.0.0   I2C                                                               03/26/2018 09:49:56 PAGE 4   
+
+ 180   3              ByteNumber--;     
+ 181   3            }
+ 182   2            if (ByteNumber==1) AA=0;
+ 183   2            break;
+ 184   2      
+ 185   2          case 0x58://0x58 收到数据字节NACK 已发送
+ 186   2            *I2CDataBuff=SMB0DAT;
+ 187   2            STO=1;
+ 188   2            BusBusy=0; // 释放SMBus
+ 189   2            NoStop=1;
+ 190   2      
+ 191   2            break;
+ 192   2            
+ 193   2          default:// 其它状态码没有意义,复位SMBus
+ 194   2            STO=1;
+ 195   2            BusBusy=0;
+ 196   2            break;
+ 197   2          }
+ 198   1        SI=0; // 清除中断标志
+ 199   1      }
+ 200          
+ 201          
+ 202          
+ 203          
+ 204          /***********************************************************************************
+ 205          * 函数名称：ReadPcf;
+ 206          *
+ 207          * 函数功能描述：读PCF8563;
+ 208          *              
+ 209          * 输入参数：unsigned char类型指针BytesAddress，读出数据存储的头地址;
+ 210          *     unsigned char 类型RomAddress，片内地址;
+ 211          *     unsigned char 类型Count，读数据个数;
+ 212          *
+ 213          * 返回数据：none；
+ 214          *
+ 215          * 注意：    none;
+ 216          ************************************************************************************/
+ 217          
+ 218          void ReadPcf( int *BytesAddress,int RomAddress,unsigned char Count)//读PCF8563
+ 219          {
+ 220   1      /*
+ 221   1        while (BusBusy);
+ 222   1        I2CDataBuff=&RomAddress;
+ 223   1        BusBusy=1;
+ 224   1        AA=1;
+ 225   1        NoStop=0;
+ 226   1        ByteNumber=1;
+ 227   1        Command=I2CPcfAddressW;
+ 228   1        STA=1;
+ 229   1        while (BusBusy);
+ 230   1          NoStop=1;
+ 231   1        I2CDataBuff=BytesAddress;
+ 232   1        BusBusy=1;
+ 233   1        AA=1;
+ 234   1        ByteNumber=Count;
+ 235   1        Command=I2CPcfAddressR;
+ 236   1        STA=1;
+ 237   1        while (BusBusy);*/
+ 238   1      
+ 239   1      
+ 240   1        ChipChoice=0;
+ 241   1        ByteReadAddress=BytesAddress;
+C51 COMPILER V9.53.0.0   I2C                                                               03/26/2018 09:49:56 PAGE 5   
+
+ 242   1        ByteReadBytes=Count;    
+ 243   1        while (BusBusy);
+ 244   1        I2CDataBuff=&RomAddress;//存储空间地址
+ 245   1        BusBusy=1;
+ 246   1        AA=1;
+ 247   1        //NoStop=1;
+ 248   1        NoStop=0;
+ 249   1        ByteNumber=1;
+ 250   1        Command=I2CPcfAddressW;//设备写地址
+ 251   1        STA=1;
+ 252   1        while (BusBusy);
+ 253   1      }
+ 254          
+ 255          /***********************************************************************************
+ 256          * 函数名称：WritePcf;
+ 257          *
+ 258          * 函数功能描述：写PCF8563;
+ 259          *              
+ 260          * 输入参数：unsigned char类型指针BytesAddress，写入数据的头地址;
+ 261          *     unsigned char 类型RomAddress，片内地址;
+ 262          *     unsigned char 类型Count，写数据个数;
+ 263          *
+ 264          * 返回数据：none；
+ 265          *
+ 266          * 注意：    none;
+ 267          ************************************************************************************/
+ 268          /*
+ 269          void WritePcf(unsigned char *BytesAddress,unsigned char RomAddress,unsigned char Count)//写PCF8563
+ 270          {
+ 271            int xdata TempBuff[17],n;
+ 272            ChipChoice=0;
+ 273            TempBuff[0]=RomAddress;
+ 274            for(n=1;n<(Count+1);n++)
+ 275            {
+ 276              TempBuff[n]=*BytesAddress++;
+ 277            }
+ 278            while (BusBusy);
+ 279            NoStop=1;
+ 280            I2CDataBuff=&TempBuff[0];
+ 281            BusBusy=1;
+ 282            AA=1;
+ 283            ByteNumber=Count+1;
+ 284            Command=I2CPcfAddressW;
+ 285            STA=1;
+ 286            while (BusBusy);
+ 287          }*/
+ 288          
+ 289          /***********************************************************************************/
+ 290          // 文件结束
+ 291          /***********************************************************************************/
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    418    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     10       6
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

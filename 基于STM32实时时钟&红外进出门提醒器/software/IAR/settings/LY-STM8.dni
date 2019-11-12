@@ -1,0 +1,64 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[InterruptLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+SumSortOrder=0
+[DataLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+[Breakpoints2]
+Count=0
+[Interrupts]
+Enabled=1
+[MemoryMap]
+Enabled=0
+Base=0
+UseAuto=0
+TypeViolation=1
+UnspecRange=1
+ActionState=1
+[Trace1]
+Enabled=0
+ShowSource=1
+[Simulator]
+Freq=16000000
+[DebugChecksum]
+Checksum=873836898
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[DataSample]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[Breakpoints]
+Count=0
+[Aliases]
+A0=_ "E:\01. (众想)剑齿虎STM8S208MB开发板\剑齿虎开发板(A盘)\02. 剑齿虎开发板-视频教程\第10讲 点亮第一个发光二极管\程序\LIB\src\stm8s_clk.c" "D:\01.百度网盘共享\03.(众想)剑齿虎STM8S208MB开发板\剑齿虎开发板(A盘)\02. 剑齿虎开发板-视频教程\第10讲 点亮第一个发光二极管\程序\LIB\src\stm8s_clk.c"
+Count=1
+SuppressDialog=1
+[DebuggerSettings]
+DisableInterruptsWhenStepping=0

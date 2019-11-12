@@ -1,0 +1,376 @@
+C51 COMPILER V9.53.0.0   PCF8563                                                           01/01/2018 15:38:08 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE PCF8563
+OBJECT MODULE PLACED IN PCF8563.OBJ
+COMPILER INVOKED BY: Z:\Software\Keil4\C51\BIN\C51.EXE PCF8563.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(
+                    -2)
+
+line level    source
+
+   1          #include "c8051f020.h"
+   2          #include "delay.h"
+   3          #include "I2C.h"
+   4          #include "PCF8563.h"
+*** ERROR C231 IN LINE 15 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P0': redefinition
+*** ERROR C231 IN LINE 16 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SP': redefinition
+*** ERROR C231 IN LINE 17 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'DPL': redefinition
+*** ERROR C231 IN LINE 18 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'DPH': redefinition
+*** ERROR C231 IN LINE 19 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P4': redefinition
+*** ERROR C231 IN LINE 20 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P5': redefinition
+*** ERROR C231 IN LINE 21 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P6': redefinition
+*** ERROR C231 IN LINE 22 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCON': redefinition
+*** ERROR C231 IN LINE 23 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TCON': redefinition
+*** ERROR C231 IN LINE 24 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TMOD': redefinition
+*** ERROR C231 IN LINE 25 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TL0': redefinition
+*** ERROR C231 IN LINE 26 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TL1': redefinition
+*** ERROR C231 IN LINE 27 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TH0': redefinition
+*** ERROR C231 IN LINE 28 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TH1': redefinition
+*** ERROR C231 IN LINE 29 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CKCON': redefinition
+*** ERROR C231 IN LINE 30 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PSCTL': redefinition
+*** ERROR C231 IN LINE 31 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P1': redefinition
+*** ERROR C231 IN LINE 32 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TMR3CN': redefinition
+*** ERROR C231 IN LINE 33 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TMR3RLL': redefinition
+*** ERROR C231 IN LINE 34 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TMR3RLH': redefinition
+*** ERROR C231 IN LINE 35 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TMR3L': redefinition
+*** ERROR C231 IN LINE 36 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TMR3H': redefinition
+*** ERROR C231 IN LINE 37 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P7': redefinition
+*** ERROR C231 IN LINE 38 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SCON0': redefinition
+*** ERROR C231 IN LINE 39 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SBUF0': redefinition
+*** ERROR C231 IN LINE 40 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SPI0CFG': redefinition
+*** ERROR C231 IN LINE 41 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SPI0DAT': redefinition
+*** ERROR C231 IN LINE 42 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC1': redefinition
+*** ERROR C231 IN LINE 43 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SPI0CKR': redefinition
+*** ERROR C231 IN LINE 44 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CPT0CN': redefinition
+*** ERROR C231 IN LINE 45 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CPT1CN': redefinition
+*** ERROR C231 IN LINE 46 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P2': redefinition
+*** ERROR C231 IN LINE 47 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EMI0TC': redefinition
+*** ERROR C231 IN LINE 48 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EMI0CF': redefinition
+*** ERROR C231 IN LINE 49 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P0MDOUT': redefinition
+*** ERROR C231 IN LINE 50 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P1MDOUT': redefinition
+*** ERROR C231 IN LINE 51 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P2MDOUT': redefinition
+*** ERROR C231 IN LINE 52 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P3MDOUT': redefinition
+*** ERROR C231 IN LINE 53 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'IE': redefinition
+*** ERROR C231 IN LINE 54 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SADDR0': redefinition
+*** ERROR C231 IN LINE 55 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC1CN': redefinition
+*** ERROR C231 IN LINE 56 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC1CF': redefinition
+*** ERROR C231 IN LINE 57 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AMX1SL': redefinition
+*** ERROR C231 IN LINE 58 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P3IF': redefinition
+*** ERROR C231 IN LINE 59 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SADEN1': redefinition
+*** ERROR C231 IN LINE 60 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EMI0CN': redefinition
+*** ERROR C231 IN LINE 61 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P3': redefinition
+*** ERROR C231 IN LINE 62 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'OSCXCN': redefinition
+*** ERROR C231 IN LINE 63 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'OSCICN': redefinition
+*** ERROR C231 IN LINE 64 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P74OUT': redefinition
+C51 COMPILER V9.53.0.0   PCF8563                                                           01/01/2018 15:38:08 PAGE 2   
+
+*** ERROR C231 IN LINE 65 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'FLSCL': redefinition
+*** ERROR C231 IN LINE 66 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'FLACL': redefinition
+*** ERROR C231 IN LINE 67 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'IP': redefinition
+*** ERROR C231 IN LINE 68 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SADEN0': redefinition
+*** ERROR C231 IN LINE 69 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AMX0CF': redefinition
+*** ERROR C231 IN LINE 70 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AMX0SL': redefinition
+*** ERROR C231 IN LINE 71 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC0CF': redefinition
+*** ERROR C231 IN LINE 72 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P1MDIN': redefinition
+*** ERROR C231 IN LINE 73 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC0L': redefinition
+*** ERROR C231 IN LINE 74 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC0H': redefinition
+*** ERROR C231 IN LINE 75 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SMB0CN': redefinition
+*** ERROR C231 IN LINE 76 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SMB0STA': redefinition
+*** ERROR C231 IN LINE 77 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SMB0DAT': redefinition
+*** ERROR C231 IN LINE 78 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SMB0ADR': redefinition
+*** ERROR C231 IN LINE 79 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC0GTL': redefinition
+*** ERROR C231 IN LINE 80 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC0GTH': redefinition
+*** ERROR C231 IN LINE 81 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC0LTL': redefinition
+*** ERROR C231 IN LINE 82 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC0LTH': redefinition
+*** ERROR C231 IN LINE 83 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'T2CON': redefinition
+*** ERROR C231 IN LINE 84 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'T4CON': redefinition
+*** ERROR C231 IN LINE 85 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RCAP2L': redefinition
+*** ERROR C231 IN LINE 86 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RCAP2H': redefinition
+*** ERROR C231 IN LINE 87 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TL2': redefinition
+*** ERROR C231 IN LINE 88 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TH2': redefinition
+*** ERROR C231 IN LINE 89 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SMB0CR': redefinition
+*** ERROR C231 IN LINE 90 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PSW': redefinition
+*** ERROR C231 IN LINE 91 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'REF0CN': redefinition
+*** ERROR C231 IN LINE 92 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'DAC0L': redefinition
+*** ERROR C231 IN LINE 93 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'DAC0H': redefinition
+*** ERROR C231 IN LINE 94 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'DAC0CN': redefinition
+*** ERROR C231 IN LINE 95 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'DAC1L': redefinition
+*** ERROR C231 IN LINE 96 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'DAC1H': redefinition
+*** ERROR C231 IN LINE 97 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'DAC1CN': redefinition
+*** ERROR C231 IN LINE 98 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CN': redefinition
+*** ERROR C231 IN LINE 99 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0MD': redefinition
+*** ERROR C231 IN LINE 100 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPM0': redefinition
+*** ERROR C231 IN LINE 101 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPM1': redefinition
+*** ERROR C231 IN LINE 102 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPM2': redefinition
+*** ERROR C231 IN LINE 103 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPM3': redefinition
+*** ERROR C231 IN LINE 104 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPM4': redefinition
+*** ERROR C231 IN LINE 105 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ACC': redefinition
+*** ERROR C231 IN LINE 106 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'XBR0': redefinition
+*** ERROR C231 IN LINE 107 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'XBR1': redefinition
+*** ERROR C231 IN LINE 108 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'XBR2': redefinition
+*** ERROR C231 IN LINE 109 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RCAP4L': redefinition
+*** ERROR C231 IN LINE 110 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RCAP4H': redefinition
+*** ERROR C231 IN LINE 111 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EIE1': redefinition
+*** ERROR C231 IN LINE 112 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EIE2': redefinition
+*** ERROR C231 IN LINE 113 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ADC0CN': redefinition
+*** ERROR C231 IN LINE 114 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0L': redefinition
+*** ERROR C231 IN LINE 115 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPL0': redefinition
+*** ERROR C231 IN LINE 116 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPL1': redefinition
+*** ERROR C231 IN LINE 117 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPL2': redefinition
+*** ERROR C231 IN LINE 118 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPL3': redefinition
+*** ERROR C231 IN LINE 119 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPL4': redefinition
+*** ERROR C231 IN LINE 120 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RSTSRC': redefinition
+*** ERROR C231 IN LINE 121 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'B': redefinition
+*** ERROR C231 IN LINE 122 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SCON1': redefinition
+*** ERROR C231 IN LINE 123 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SBUF1': redefinition
+*** ERROR C231 IN LINE 124 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SADDR1': redefinition
+*** ERROR C231 IN LINE 125 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TL4': redefinition
+*** ERROR C231 IN LINE 126 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TH4': redefinition
+C51 COMPILER V9.53.0.0   PCF8563                                                           01/01/2018 15:38:08 PAGE 3   
+
+*** ERROR C231 IN LINE 127 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EIP1': redefinition
+*** ERROR C231 IN LINE 128 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EIP2': redefinition
+*** ERROR C231 IN LINE 129 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SPI0CN': redefinition
+*** ERROR C231 IN LINE 130 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0H': redefinition
+*** ERROR C231 IN LINE 131 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPH0': redefinition
+*** ERROR C231 IN LINE 132 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPH1': redefinition
+*** ERROR C231 IN LINE 133 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPH2': redefinition
+*** ERROR C231 IN LINE 134 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPH3': redefinition
+*** ERROR C231 IN LINE 135 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PCA0CPH4': redefinition
+*** ERROR C231 IN LINE 136 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'WDTCN': redefinition
+*** ERROR C231 IN LINE 142 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TF1': redefinition
+*** ERROR C231 IN LINE 143 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TR1': redefinition
+*** ERROR C231 IN LINE 144 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TF0': redefinition
+*** ERROR C231 IN LINE 145 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TR0': redefinition
+*** ERROR C231 IN LINE 146 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'IE1': redefinition
+*** ERROR C231 IN LINE 147 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'IT1': redefinition
+*** ERROR C231 IN LINE 148 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'IE0': redefinition
+*** ERROR C231 IN LINE 149 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'IT0': redefinition
+*** ERROR C231 IN LINE 152 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SM00': redefinition
+*** ERROR C231 IN LINE 153 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SM10': redefinition
+*** ERROR C231 IN LINE 154 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SM20': redefinition
+*** ERROR C231 IN LINE 155 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'REN0': redefinition
+*** ERROR C231 IN LINE 156 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TB80': redefinition
+*** ERROR C231 IN LINE 157 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RB80': redefinition
+*** ERROR C231 IN LINE 158 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TI0': redefinition
+*** ERROR C231 IN LINE 159 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RI0': redefinition
+*** ERROR C231 IN LINE 162 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EA': redefinition
+*** ERROR C231 IN LINE 163 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ET2': redefinition
+*** ERROR C231 IN LINE 164 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ES0': redefinition
+*** ERROR C231 IN LINE 165 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ET1': redefinition
+*** ERROR C231 IN LINE 166 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EX1': redefinition
+*** ERROR C231 IN LINE 167 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ET0': redefinition
+*** ERROR C231 IN LINE 168 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EX0': redefinition
+*** ERROR C231 IN LINE 171 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PT2': redefinition
+*** ERROR C231 IN LINE 172 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PS': redefinition
+*** ERROR C231 IN LINE 173 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PT1': redefinition
+*** ERROR C231 IN LINE 174 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PX1': redefinition
+*** ERROR C231 IN LINE 175 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PT0': redefinition
+*** ERROR C231 IN LINE 176 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'PX0': redefinition
+*** ERROR C231 IN LINE 179 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'BUSY': redefinition
+*** ERROR C231 IN LINE 180 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'ENSMB': redefinition
+*** ERROR C231 IN LINE 181 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'STA': redefinition
+*** ERROR C231 IN LINE 182 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'STO': redefinition
+*** ERROR C231 IN LINE 183 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SI': redefinition
+*** ERROR C231 IN LINE 184 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AA': redefinition
+*** ERROR C231 IN LINE 185 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SMBFTE': redefinition
+*** ERROR C231 IN LINE 186 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SMBTOE': redefinition
+*** ERROR C231 IN LINE 189 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TF2': redefinition
+*** ERROR C231 IN LINE 190 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EXF2': redefinition
+*** ERROR C231 IN LINE 191 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RCLK0': redefinition
+*** ERROR C231 IN LINE 192 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TCLK0': redefinition
+*** ERROR C231 IN LINE 193 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'EXEN2': redefinition
+*** ERROR C231 IN LINE 194 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TR2': redefinition
+*** ERROR C231 IN LINE 195 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CT2': redefinition
+*** ERROR C231 IN LINE 196 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CPRL2': redefinition
+*** ERROR C231 IN LINE 199 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CY': redefinition
+*** ERROR C231 IN LINE 200 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AC': redefinition
+*** ERROR C231 IN LINE 201 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'F0': redefinition
+*** ERROR C231 IN LINE 202 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RS1': redefinition
+*** ERROR C231 IN LINE 203 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RS0': redefinition
+*** ERROR C231 IN LINE 204 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'OV': redefinition
+*** ERROR C231 IN LINE 205 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'F1': redefinition
+C51 COMPILER V9.53.0.0   PCF8563                                                           01/01/2018 15:38:08 PAGE 4   
+
+*** ERROR C231 IN LINE 206 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'P': redefinition
+*** ERROR C231 IN LINE 209 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CF': redefinition
+*** ERROR C231 IN LINE 210 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CR': redefinition
+*** ERROR C231 IN LINE 211 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CCF4': redefinition
+*** ERROR C231 IN LINE 212 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CCF3': redefinition
+*** ERROR C231 IN LINE 213 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CCF2': redefinition
+*** ERROR C231 IN LINE 214 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CCF1': redefinition
+*** ERROR C231 IN LINE 215 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'CCF0': redefinition
+*** ERROR C231 IN LINE 218 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AD0EN': redefinition
+*** ERROR C231 IN LINE 219 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AD0TM': redefinition
+*** ERROR C231 IN LINE 220 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AD0INT': redefinition
+*** ERROR C231 IN LINE 221 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AD0BUSY': redefinition
+*** ERROR C231 IN LINE 222 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AD0CM1': redefinition
+*** ERROR C231 IN LINE 223 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AD0CM0': redefinition
+*** ERROR C231 IN LINE 224 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AD0WINT': redefinition
+*** ERROR C231 IN LINE 225 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'AD0LJST': redefinition
+*** ERROR C231 IN LINE 228 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SPIF': redefinition
+*** ERROR C231 IN LINE 229 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'WCOL': redefinition
+*** ERROR C231 IN LINE 230 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'MODF': redefinition
+*** ERROR C231 IN LINE 231 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'RXOVRN': redefinition
+*** ERROR C231 IN LINE 232 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'TXBSY': redefinition
+*** ERROR C231 IN LINE 233 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SLVSEL': redefinition
+*** ERROR C231 IN LINE 234 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'MSTEN': redefinition
+*** ERROR C231 IN LINE 235 OF Z:\Software\Keil4\C51\Inc\Cygnal\c8051f020.h: 'SPIEN': redefinition
+*** ERROR C136 IN LINE 38 OF PCF8563.h: invalid dimension size: [0]
+*** ERROR C231 IN LINE 38 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 38 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 39 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C247 IN LINE 39 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 40 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 40 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 40 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 41 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 41 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 41 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 42 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 42 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 42 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 43 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 43 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 43 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 44 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 44 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 44 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 45 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 45 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 45 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 46 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 46 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 46 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 47 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 47 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 47 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 48 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 48 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 48 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 49 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 49 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 49 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 50 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 50 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 50 OF PCF8563.h: non-address/-constant initializer
+C51 COMPILER V9.53.0.0   PCF8563                                                           01/01/2018 15:38:08 PAGE 5   
+
+*** ERROR C279 IN LINE 51 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 51 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 51 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 52 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 52 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 52 OF PCF8563.h: non-address/-constant initializer
+*** ERROR C279 IN LINE 53 OF PCF8563.h: 'set': multiple initialization
+*** ERROR C231 IN LINE 53 OF PCF8563.h: 'set': redefinition
+*** ERROR C247 IN LINE 53 OF PCF8563.h: non-address/-constant initializer
+   5          
+   6          struct Time
+   7          {
+   8            unsigned char second;
+   9            unsigned char minite;
+  10            unsigned char hour;
+  11            unsigned char day;
+  12            unsigned char week;
+  13            unsigned char month;
+  14            unsigned char year;
+  15          };
+*** ERROR C226 IN LINE 15 OF PCF8563.c: 'Time': duplicate struct/union/enum tag
+  16          struct Reg
+  17          {
+  18            unsigned char reg1;
+  19            unsigned char reg2;
+  20            unsigned char clk;
+  21            unsigned char count1;
+  22            unsigned char count2;
+  23          };
+*** ERROR C226 IN LINE 23 OF PCF8563.c: 'Reg': duplicate struct/union/enum tag
+  24          struct Alarm
+  25          {
+  26            unsigned char minite;
+  27            unsigned char hour;
+  28            unsigned char day;
+  29            unsigned char week;
+  30          };
+*** ERROR C226 IN LINE 30 OF PCF8563.c: 'Alarm': duplicate struct/union/enum tag
+  31          
+  32          
+  33            struct Time TIME={0x01,0x22,0x15,0x01,0x01,0x01,0x18};//ÉèÖÃÊ±¼ä
+*** ERROR C279 IN LINE 33 OF PCF8563.c: 'TIME': multiple initialization
+  34            struct Reg REG={0x00,0x00,0x83,0x82,0x00};//ÉèÖÃ¼Ä´æÆ÷
+*** ERROR C279 IN LINE 34 OF PCF8563.c: 'REG': multiple initialization
+  35            struct Alarm ALARM={0x00,0x00,0x00,0x00};//ÉèÖÃ±¨Ê±¿ØÖÆ¼Ä´æÆ÷
+*** ERROR C279 IN LINE 35 OF PCF8563.c: 'ALARM': multiple initialization
+  36            unsigned char xdata Time[16]; //¶Á¼Ä´æÆ÷pecf8563  buffer
+  37            unsigned char set[16];//Ð´¼Ä´æÆ÷buffer
+*** ERROR C231 IN LINE 37 OF PCF8563.c: 'set': redefinition
+  38            
+  39            set[0]=REG.reg1;      //¿ØÖÆ×´Ì¬¼Ä´æÆ÷1  00H
+*** ERROR C136 IN LINE 39 OF PCF8563.c: invalid dimension size: [0]
+*** ERROR C279 IN LINE 39 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 39 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 39 OF PCF8563.c: non-address/-constant initializer
+  40            set[1]=REG.reg2;      //¿ØÖÆ×´Ì¬¼Ä´æÆ÷1  01H
+*** ERROR C279 IN LINE 40 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C247 IN LINE 40 OF PCF8563.c: non-address/-constant initializer
+  41            set[2]=TIME.second;
+*** ERROR C279 IN LINE 41 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 41 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 41 OF PCF8563.c: non-address/-constant initializer
+C51 COMPILER V9.53.0.0   PCF8563                                                           01/01/2018 15:38:08 PAGE 6   
+
+  42            set[3]=TIME.minite;
+*** ERROR C279 IN LINE 42 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 42 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 42 OF PCF8563.c: non-address/-constant initializer
+  43            set[4]=TIME.hour;
+*** ERROR C279 IN LINE 43 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 43 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 43 OF PCF8563.c: non-address/-constant initializer
+  44            set[5]=TIME.day;
+*** ERROR C279 IN LINE 44 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 44 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 44 OF PCF8563.c: non-address/-constant initializer
+  45            set[6]=TIME.week;
+*** ERROR C279 IN LINE 45 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 45 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 45 OF PCF8563.c: non-address/-constant initializer
+  46            set[7]=TIME.month;
+*** ERROR C279 IN LINE 46 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 46 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 46 OF PCF8563.c: non-address/-constant initializer
+  47            set[8]=TIME.year;
+*** ERROR C279 IN LINE 47 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 47 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 47 OF PCF8563.c: non-address/-constant initializer
+  48            set[9]=ALARM.minite;
+*** ERROR C279 IN LINE 48 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 48 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 48 OF PCF8563.c: non-address/-constant initializer
+  49            set[10]=ALARM.hour;
+*** ERROR C279 IN LINE 49 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 49 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 49 OF PCF8563.c: non-address/-constant initializer
+  50            set[11]=ALARM.day;
+*** ERROR C279 IN LINE 50 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 50 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 50 OF PCF8563.c: non-address/-constant initializer
+  51            set[12]=ALARM.week;
+*** ERROR C279 IN LINE 51 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 51 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 51 OF PCF8563.c: non-address/-constant initializer
+  52            set[13]=REG.clk;    //CLKOUTÊä³ö¼Ä´æÆ÷   0DH
+*** ERROR C279 IN LINE 52 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 52 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 52 OF PCF8563.c: non-address/-constant initializer
+  53            set[14]=REG.count1; //¶¨Ê±Æ÷¿ØÖÆ¼Ä´æÆ÷   0EH
+*** ERROR C279 IN LINE 53 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 53 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 53 OF PCF8563.c: non-address/-constant initializer
+  54            set[15]=REG.count2; //¶¨Ê±Æ÷µ¹¼ÆÊý¼Ä´æÆ÷ 0FH
+*** ERROR C279 IN LINE 54 OF PCF8563.c: 'set': multiple initialization
+*** ERROR C231 IN LINE 54 OF PCF8563.c: 'set': redefinition
+*** ERROR C247 IN LINE 54 OF PCF8563.c: non-address/-constant initializer
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  300 ERROR(S)

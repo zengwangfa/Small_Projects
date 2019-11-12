@@ -1,0 +1,83 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[DebugChecksum]
+Checksum=-1604337387
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[InterruptLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+SumSortOrder=0
+[DataLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+[Breakpoints2]
+Count=0
+[Interrupts]
+Enabled=1
+[MemoryMap]
+Enabled=0
+Base=0
+UseAuto=0
+TypeViolation=1
+UnspecRange=1
+ActionState=1
+[Trace1]
+Enabled=0
+ShowSource=1
+[Simulator]
+Freq=16000000
+[SfrWindow]
+Show=1 1
+Sort=4 0
+[DataSample]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[Breakpoints]
+Bp0=_ "STD_CODE" "{$PROJ_DIR$\stm8s_it.c}.370.2" 1 0 0 0 "" 0 ""
+Count=1
+[Aliases]
+A0=_ "C:\Users\Administrator.C1QAPFPREXQRMXD\Desktop\MY_DEMO5-27xxx\MY_DEMO5-2600\main.c" ""
+A1=_ "C:\Users\Administrator\Desktop\MY_DEMO5-27\MY_DEMO5-2600\main.c" ""
+A2=_ "C:\Users\Administrator\Desktop\STM8S\stm8\stm8s_it.c" ""
+A3=_ "C:\Users\Administrator\Desktop\stm8\STM8S_StdPeriph_Driver\src\stm8s_clk.c" ""
+A4=_ "C:\Users\Administrator\Desktop\stm8\STM8S_StdPeriph_Driver\src\stm8s_gpio.c" ""
+A5=_ "C:\Users\Administrator\Desktop\stm8\STM8S_StdPeriph_Driver\src\stm8s_tim1.c" ""
+A6=_ "C:\Users\Administrator\Desktop\stm8\STM8S_StdPeriph_Driver\src\stm8s_tim2.c" ""
+A7=_ "D:\大三\STM8\FMQ_Y\MY_DEMO5-2600\STM8S_StdPeriph_Driver\src\stm8s_clk.c" ""
+A8=_ "D:\大三\STM8\FMQ_Y\MY_DEMO5-2600\STM8S_StdPeriph_Driver\src\stm8s_tim1.c" ""
+A9=_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\CLOCK - 副本\STM8S_StdPeriph_Driver\src\stm8s_tim1.c" ""
+A10=_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\CLOCK - 副本\STM8S_StdPeriph_Driver\src\stm8s_tim2.c" ""
+A11=_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\CLOCK - 副本\STM8S_StdPeriph_Driver\src\stm8s_tim4.c" ""
+A12=_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\CLOCK\STM8S_StdPeriph_Driver\src\stm8s_gpio.c" ""
+A13=_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\MY_DEMO\main.c" ""
+A14=_ "D:\大三\STM8\STM8S\STM8S103F3 STM8S103F3资料\STM8S103F3库例程\IAR\MY_DEMO\stm8s_it.c" ""
+Count=15
+SuppressDialog=1
+[DebuggerSettings]
+DisableInterruptsWhenStepping=0
