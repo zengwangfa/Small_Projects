@@ -84,3 +84,5 @@ SPWM (Sinusoidal PWM)：
 
 测得相位差为120°，可能是死区时间未设置好，顶峰有些失真。
 
+<div align=center>
+<img src="https://img-blog.csdnimg.cn/20190912225809893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDkyOTMy,size_16,color_FFFFFF"/>

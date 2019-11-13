@@ -377,4 +377,5 @@ OELD可通过拨码开关切换页面
         <td ><center><img src="https://img-blog.csdnimg.cn/20181207215554253.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDkyOTMy,size_16,color_FFFFFF,t_70"  >图2 小车整体效果图</center></td>
 </table>
 
-
+<div align=center>
+<img src="https://img-blog.csdnimg.cn/20190912225809893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDkyOTMy,size_16,color_FFFFFF"/>

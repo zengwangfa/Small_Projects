@@ -740,10 +740,6 @@ const unsigned char  Hzk[][32]={
         <td ><center><img src="https://img-blog.csdnimg.cn/2018121820513519.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDkyOTMy,size_16,color_FFFFFF,t_70"  >图6  设定时间界面</center></td>
         <td ><center><img src="https://img-blog.csdnimg.cn/20181218205142272.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDkyOTMy,size_16,color_FFFFFF,t_70"  width="108%"  >图7  设定浇水界面</center></td>
 </table>
-附【Download】：
-两个方案的 程序+硬件（keil4[C8051f020]+IAR[stm8]程序+串口屏工程+原理图+PCB）：
 
-[点我下载](https://download.csdn.net/download/qq_39492932/10859728)
-
-==若想直接获得下载文件，留言留下邮箱即可，我看到就会发==
-
+<div align=center>
+<img src="https://img-blog.csdnimg.cn/20190912225809893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDkyOTMy,size_16,color_FFFFFF"/>
