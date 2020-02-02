@@ -2,9 +2,7 @@
 注：==本文仅用于学习分享==，分享自己DIY制作的多模式51单片机心形流水灯[纯手工制作]，若有不妥之处，请指正，感谢]
 
 
-<font color=red size=5 face="微软雅黑">本帖相关 【代码与原理图PCB 】下载链接↓↓↓：</font>
-链接：https://pan.baidu.com/s/1X5z-m_Zj6Xq4NnS9ReeVmA 
-提取码：e0cz 
+
 
 <kbd>**用到的工具有**：</kbd>
  - [x]  Keil 4编译器环境
